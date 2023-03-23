@@ -1,0 +1,11 @@
+.grid-tile {
+    width:10px;
+    height: 10px;
+    background: black;
+    border: white 1px solid;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+}
