@@ -5,3 +5,11 @@ for (let totalDivs = size * size; totalDivs > 0; totalDivs--) {
     div.classList.add('grid-tile');
     gridContainer.appendChild(div);
 }
+
+const gridTiles = document.querySelectorAll('.grid-tile');
+
+gridTiles.forEach(tile => tile.addEventListener('mouseover', activateTile))
+
+function activateTile(e) {
+    e.target.classList.add('active')
+}
