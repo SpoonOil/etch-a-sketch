@@ -3,6 +3,8 @@ const gridContainer = document.querySelector('.grid-container')
 resizeBtn.addEventListener('click', () => resize())
 //hooking up the basic items
 
+let mode = 'normal';
+
 generateGrid(16);
 
 function generateGrid(size) {
@@ -18,7 +20,9 @@ function generateGrid(size) {
 
 function resize() {
     let gridSize = prompt(`How big should the canvas be?
-    MAX: 100`, 16);
+    MAX: 80`, 16);
+    if (gridSize>80) gridsize = 80;
+    if (gridSize < 1) gridSize = 1; 
     removeAllChildNodes(gridContainer);
     generateGrid(gridSize);
 }
