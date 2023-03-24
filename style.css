@@ -12,7 +12,7 @@ main {
     align-content: center;
 }
 .grid-tile {
-    background: white;
+    background-color: hsl(0, 0%, 100%);
 }
 
 .grid-container {

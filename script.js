@@ -1,11 +1,18 @@
 const resizeBtn = document.querySelector('.resize-button');
 const gridContainer = document.querySelector('.grid-container')
+const grayBtn = document.querySelector('.grayscale-button');
+const colorBtn = document.querySelector('.color-button');
 resizeBtn.addEventListener('click', () => resize())
-//hooking up the basic items
+grayBtn.addEventListener('click', () => modeSwap('grayscale'));
+colorBtn.addEventListener('click', () => modeSwap('color'))//hooking up the basic items
 
 let mode = 'normal';
 
 generateGrid(16);
+
+function modeSwap(newMode) {
+    mode = newMode;
+}
 
 function generateGrid(size) {
     for (let totalDivs = size * size; totalDivs > 0; totalDivs--) {
@@ -33,12 +40,25 @@ function removeAllChildNodes(parent) {
     }
 }
 
+function darken(node) {
+    if (node.style.index === undefined) {
+        node.style.index = 90;
+        node.style.backgroundColor = `hsl(0, 0%, ${node.style.index}%`
+    } else if (node.style.index == 0){
+        return
+    } else {
+        console.log('bruh')
+        node.style.index -= 10;
+        node.style.backgroundColor = `hsl(0, 0%, ${node.style.index}%`
+    }
+}
 function activateTile(e) {
    if (mode === 'normal') {
      e.target.classList.add('active')
    } else if (mode==='grayscale'){
-    console.log(e.target.style.color);
+    darken(e.target)
    } else if (mode === 'color') {
-    console.log(e.target.style.color)
+    const randomColor = Math.floor(Math.random()*16777215).toString(16)
+    e.target.style.backgroundColor = `#${randomColor}`
    }
 }
