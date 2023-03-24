@@ -1,14 +1,33 @@
-let size = 16;
+const resizeBtn = document.querySelector('.resize-button');
 const gridContainer = document.querySelector('.grid-container')
-for (let totalDivs = size * size; totalDivs > 0; totalDivs--) {
-    const div = document.createElement('div');
-    div.classList.add('grid-tile');
-    gridContainer.appendChild(div);
+resizeBtn.addEventListener('click', () => resize())
+//hooking up the basic items
+
+generateGrid(16);
+
+function generateGrid(size) {
+    for (let totalDivs = size * size; totalDivs > 0; totalDivs--) {
+        const div = document.createElement('div');
+        div.classList.add('grid-tile');
+        gridContainer.appendChild(div);
+        gridContainer.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+        const gridTiles = document.querySelectorAll('.grid-tile');
+        gridTiles.forEach(tile => tile.addEventListener('mouseover', activateTile))
+    }
 }
 
-const gridTiles = document.querySelectorAll('.grid-tile');
+function resize() {
+    let gridSize = prompt(`How big should the canvas be?
+    MAX: 100`, 16);
+    removeAllChildNodes(gridContainer);
+    generateGrid(gridSize);
+}
 
-gridTiles.forEach(tile => tile.addEventListener('mouseover', activateTile))
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
 
 function activateTile(e) {
     e.target.classList.add('active')
