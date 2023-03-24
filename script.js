@@ -21,7 +21,7 @@ function generateGrid(size) {
 function resize() {
     let gridSize = prompt(`How big should the canvas be?
     MAX: 80`, 16);
-    if (gridSize>80) gridsize = 80;
+    if (gridSize>80) gridSize = 80;
     if (gridSize < 1) gridSize = 1; 
     removeAllChildNodes(gridContainer);
     generateGrid(gridSize);
@@ -34,5 +34,11 @@ function removeAllChildNodes(parent) {
 }
 
 function activateTile(e) {
-    e.target.classList.add('active')
+   if (mode === 'normal') {
+     e.target.classList.add('active')
+   } else if (mode==='grayscale'){
+    console.log(e.target.style.color);
+   } else if (mode === 'color') {
+    console.log(e.target.style.color)
+   }
 }
